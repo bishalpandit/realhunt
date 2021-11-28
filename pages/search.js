@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { Flex, Box, Text, Icon } from '@chakra-ui/react'
+import { Flex, Box, Text, Icon, Button } from '@chakra-ui/react'
 import { BsFilter } from 'react-icons/bs'
 import SearchFilters from '../components/SearchFilters'
 import Property from '../components/Property'
@@ -27,14 +27,20 @@ const Search = ({ properties }) => {
                 <Text>Search Property By Filters</Text>
                 <Icon paddingLeft="2" w="7" as={BsFilter} />
             </Flex>
-            {searchFilter && <SearchFilters />}
+            {searchFilter && <SearchFilters />} {/*  Dropdown Part */}
+
+            <Flex justifyContent={"center"} paddingTop="3">
+                <Button bg="blue.200">Search By Location</Button>
+            </Flex>
+            
             <Text fontSize="2xl" p="4" fontWeight="bold">
                 Properties {router.query.purpose}
             </Text>
-            <Flex flexWrap="wrap">
+            <Flex flexWrap="wrap">  {/* Display Properties List */}
                 {properties.map(property => <Property property={property} key={property.id} />)}
             </Flex>
-            {properties.length == 0 && (
+
+            {properties.length == 0 && ( /* If No Property Present */
                 <Flex justifyContent="center" alignItems="center" flexDirection="column" marginTop="5" marginBottom="5">
                     <Image alt="no-property" src={noresult} />
                     <Text fontSize="2xl" marginTop="3">No Results</Text>
@@ -57,12 +63,12 @@ export async function getServerSideProps({ query }) {
     const areaMax = query.areaMax || '35000';
     const locationExternalIDs = query.locationExternalIDs || '5002';
     const categoryExternalID = query.categoryExternalID || '4';
-  
+
     const data = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`);
-  
+
     return {
-      props: {
-        properties: data?.hits,
-      },
+        props: {
+            properties: data?.hits,
+        },
     };
-  }
+}

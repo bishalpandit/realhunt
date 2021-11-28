@@ -16,7 +16,7 @@ const Property = ({ property: { coverPhoto, price, rentFrequency, rooms, title, 
             <Box w="full">
                 <Flex paddingTop="2" alignItems="center" justifyContent="space-between">
                     <Flex alignItems="center">
-                        <Box paddingRight="3" color="greeen.400">{isVerified && <GoVerified />}</Box>
+                        <Box paddingRight="3" color="green.400">{isVerified && <GoVerified />}</Box>
                         <Text>Rs {millify(price)}{rentFrequency && `/${rentFrequency}`}</Text>
                     </Flex>
                     <Box>
