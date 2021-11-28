@@ -7,7 +7,7 @@ import { GoVerified } from 'react-icons/go'
 import millify from 'millify'
 import DefaultImage from '../assets/house.jpg'
 
-export const Property = ({ property: { coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID } }) => (
+const Property = ({ property: { coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID } }) => (
     <Link href={`/property/${externalID}`} passHref>
         <Flex flexWrap="wrap" w="420px" p="5" paddingTop="0" justifyContent="flex-start" cursor="pointer">
             <Box>
@@ -33,3 +33,5 @@ export const Property = ({ property: { coverPhoto, price, rentFrequency, rooms, 
         </Flex>
     </Link>
 )
+
+export default Property
